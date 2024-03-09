@@ -1,11 +1,29 @@
 
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
+
+void printu(char string[]) {
+
+	int end = strlen(string);
+	printf("%c", toupper(string[0]));
+
+	for ( int i = 0; i <= end; i++ ) {
+		
+		if ( i != 0 ) {
+			
+			printf("%c", string[i]);
+
+		}
+
+	}
+
+}
 
 int check_array(int number) {
 
-	int numbers[3] = {3, 5, 7};
-	char words[10][20] = {"fizz", "buzz", "pop"};
+	int numbers[2] = {3, 5};
+	char words[10][20] = {"fizz", "buzz"};
 
 	int size_of_arr = sizeof(numbers) / sizeof(numbers[0]);
 	
@@ -14,8 +32,17 @@ int check_array(int number) {
 	for ( int i = 0; i <= size_of_arr; i++ ) {
 	
 		if ( number % numbers[i] == 0 ) {
-			printf(words[i]);
-			print_made = 1;
+
+			if ( print_made == 0 ) {
+				char head;
+				char tail[20];
+				printu(words[i]);
+				print_made = 1;
+			} else {
+				printf(words[i]);
+				print_made = 1;
+			}
+
 		}
 
 	}
@@ -56,4 +83,3 @@ void main() {
 		
 	}
 }
-
