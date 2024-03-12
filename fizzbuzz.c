@@ -1,85 +1,47 @@
-
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 
-void printu(char string[]) {
+void strclear(char string[]) { strcpy(string, ""); }
 
-	int end = strlen(string);
-	printf("%c", toupper(string[0]));
+void strcap(char string[]) {
 
-	for ( int i = 0; i <= end; i++ ) {
+	char output_string[500];
+	for ( int i = 0; i <= strlen(string); i++ ) {
 		
-		if ( i != 0 ) {
-			
-			printf("%c", string[i]);
-
-		}
-
+		if (i == 0) {output_string[i] = toupper(string[i]);}
+		else {output_string[i] = tolower(string[i]);}
+	
 	}
+
+	strcpy(string, output_string);
 
 }
 
-int check_array(int number) {
-
-	int numbers[2] = {3, 5};
-	char words[10][20] = {"fizz", "buzz"};
-
-	int size_of_arr = sizeof(numbers) / sizeof(numbers[0]);
+void calculate(int number, int condition_number, char result_word[], char output[]) {
 	
-	int print_made = 0;
+	int is_first = 0;
 
-	for ( int i = 0; i <= size_of_arr; i++ ) {
-	
-		if ( number % numbers[i] == 0 ) {
-
-			if ( print_made == 0 ) {
-				char head;
-				char tail[20];
-				printu(words[i]);
-				print_made = 1;
-			} else {
-				printf(words[i]);
-				print_made = 1;
-			}
-
-		}
-
-	}
-	
-	return print_made;
+	if ( strlen(output) == 0 ) { is_first = 1; }
+	if ( number % condition_number == 0 ) { strcat(output, result_word); }
+	if ( is_first == 1 ) { strcap(output); }
 
 }
 
-void calculate (int number) {
+void main() {
 
-	char string_of_number[50] = "";
-	sprintf(string_of_number, "%d", number);
+	char output[500] = "";
+	int ITERATIONS = 100;
 
-	int check = check_array(number);
-
-	if ( check == 0 ) {
-
-		printf(string_of_number);
+	for ( int number = 1; number <= ITERATIONS; number++ ) {
+	
+		strclear(output);
+		calculate(number, 3, "fizz", output);
+		calculate(number, 5, "buzz", output);
+		
+		if ( strlen(output) == 0 ) { printf("%d\n", number); }
+		else { printf("%s\n", output); }
 
 	}
 
-	printf("\n");
-
-}
-
-void main() {	
-
-	char store[50] = "";
-
-	strcpy(store, "");
-	for (int number = 1; number <= 100; number++) {
-		
-		char output[50] = "";
-		char string_of_number[50];
-		sprintf(string_of_number, "%d", number);
-		
-		calculate(number);
-		
-	}
 }
